@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Estados del País</title>
+</head>
+<body>
+    <h1>Estados del País </h1>
+    <ul>
+        {% for estado in datos %}
+            {% if estado.isActive %}
+            <li>{{ estado.description }} - {{ estado.codigo }}
+                <button><a href="{% url 'editarestados' estado_id=estado.id %}" >Editar </a></button>
+                <form method="post" action="{% url 'eliminarestado' estado_id=estado.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Eliminar</button>
+                </form>
+            </li>
+            {% endif %}
+        {% empty %}
+            <li>No hay estados para este país.</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Agregar Estado</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar Estado</button>
+    </form>
+</body>
+</html>

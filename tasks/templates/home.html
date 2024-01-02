@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mostrar Datos del Pais</title>
+</head>
+<body>
+    <h1>Crear Pais:</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar</button>
+    </form>
+
+    <h1>Paises:</h1>
+    <ul>
+        <li>ID  -  Cod. -  Descrip </li>
+        {% for dato in datos %}
+        <li>{{ dato.id }} -{{ dato.codigo }} - {{ dato.description }} 
+            <button><a href="{% url 'editarpais' pais_id=dato.id %}" >Editar </a></button>
+            <form method="post" action="{% url 'eliminarpais' pais_id=dato.id %}">
+                {% csrf_token %}
+                <button type="submit">Eliminar</button>
+            </form>
+            <button><a href="{% url 'estados' pais_id=dato.id %}"> Ver detalle </a></button>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,0 +1,11 @@
+# Archivos temporales
+*.pyc
+__pycache__/
+
+# Archivos de configuración
+*.env
+.secrets
+
+# Archivos de datos
+media/
+db.sqlite3
